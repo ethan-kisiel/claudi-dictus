@@ -23,6 +23,39 @@ namespace DictusClaudi.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<char?>("Age")
+                        .HasColumnType("TEXT");
+
+                    b.Property<char?>("Area")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Connotation")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int?>("Declension")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Form")
+                        .HasColumnType("TEXT");
+
+                    b.Property<char?>("Frequency")
+                        .HasColumnType("TEXT");
+
+                    b.Property<char?>("Gender")
+                        .HasColumnType("TEXT");
+
+                    b.Property<char?>("Geo")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("PartOfSpeech")
+                        .HasColumnType("TEXT");
+
+                    b.Property<char?>("Source")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int?>("Variant")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("WordStem")
                         .HasColumnType("TEXT");
 

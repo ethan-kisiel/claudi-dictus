@@ -1,41 +1,48 @@
+@using Microsoft.IdentityModel.Tokens
 @model IEnumerable<DictusClaudi.Models.DictEntry>
 
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Search</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+<form method="get" action="/Dictionary/Index/">
+    <input class="search" type="text" name="searchTerms" placeholder="Search..." />
+    <button class="btn btn-primary" type="submit">Search</button>
+</form>
+
 <table class="table">
-    <thead>
+    @if (!Model.IsNullOrEmpty())
+    {
+        <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.WordStem)
+                Stem
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.WordTranslation)
+                Part of Speech
             </th>
-            <th></th>
+            <th>
+                English Translation
+            </th>
         </tr>
-    </thead>
+        </thead>
+    }
     <tbody>
-@foreach (var item in Model) {
+    @foreach (var item in Model)
+    {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.WordStem)
+                <a asp-action="Details" asp-route-id="@item.Id">@Html.DisplayFor(modelItem => item.WordStem)</a>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DisplayPartOfSpeech)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.WordTranslation)
             </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
         </tr>
-}
+    }
     </tbody>
 </table>
