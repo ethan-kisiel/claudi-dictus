@@ -19,8 +19,11 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
+                        <li class="nav-item@(ViewData["Title"] == "Index" ? " active" : "")">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Dictionary" asp-action="Index">Lookup</a>
+                        </li>
+                        <li class="nav-item@(ViewData["Title"] == "Dictionary" ? " active" : "")">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Dictionary" asp-action="ClassicDictionary">Dictionary</a>
                         </li>
                     </ul>
                 </div>

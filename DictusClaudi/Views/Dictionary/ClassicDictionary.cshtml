@@ -1,0 +1,130 @@
+@using Microsoft.IdentityModel.Tokens
+@model IEnumerable<DictusClaudi.Models.DictEntry>
+
+@{
+    ViewData["Title"] = "Dictionary";
+}
+<h1>Dictionary</h1>
+
+
+<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+   <div class="container-fluid">
+    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+        <ul class="navbar-nav flex-grow-1">
+            <li class="nav-item@((string)ViewData["selectedLetter"] == "A" ? " active" : "")">
+                <a class="nav-link text-dark" href="?selectedLetter=A">A</a>
+            </li>
+            <li class="nav-item@((string)ViewData["selectedLetter"] == "B" ? " active" : "")">
+                <a class="nav-link text-dark" href="?selectedLetter=B">B</a>
+            </li>
+                <li class="nav-item@((string)ViewData["selectedLetter"] == "C" ? " active" : "")">
+                <a class="nav-link text-dark" href="?selectedLetter=C">C</a>
+            </li>
+                <li class="nav-item@((string)ViewData["selectedLetter"] == "D" ? " active" : "")">
+                <a class="nav-link text-dark" href="?selectedLetter=D">D</a>
+            </li>
+                <li class="nav-item@((string)ViewData["selectedLetter"] == "E" ? " active" : "")">
+                <a class="nav-link text-dark" href="?selectedLetter=E">E</a>
+            </li>
+                <li class="nav-item@((string)ViewData["selectedLetter"] == "F" ? " active" : "")">
+                <a class="nav-link text-dark" href="?selectedLetter=F">F</a>
+            </li>
+                <li class="nav-item@((string)ViewData["selectedLetter"] == "G" ? " active" : "")">
+                <a class="nav-link text-dark" href="?selectedLetter=G">G</a>
+            </li>
+                <li class="nav-item@((string)ViewData[" selectedLetter"]== "H" ? " active" : "" )">
+                <a class="nav-link text-dark" href="?selectedLetter=H">H</a>
+            </li>
+                <li class="nav-item@((string)ViewData["selectedLetter"] == "I" ? " active" : "")">
+                <a class="nav-link text-dark" href="?selectedLetter=I">I</a>
+            </li>
+                <li class="nav-item@((string)ViewData["selectedLetter"] == "J" ? " active" : "")">
+                <a class="nav-link text-dark" href="?selectedLetter=J">J</a>
+            </li>
+                <li class="nav-item@((string)ViewData["selectedLetter"] == "K" ? " active" : "")">
+                <a class="nav-link text-dark" href="?selectedLetter=K">K</a>
+            </li>
+                <li class="nav-item@((string)ViewData["selectedLetter"] == "L" ? " active" : "")">
+                <a class="nav-link text-dark" href="?selectedLetter=L">L</a>
+            </li>
+                <li class="nav-item@((string)ViewData["selectedLetter"] == "M" ? " active" : "")">
+                <a class="nav-link text-dark" href="?selectedLetter=M">M</a>
+            </li>
+                <li class="nav-item@((string)ViewData["selectedLetter"] == "N" ? " active" : "")">
+                <a class="nav-link text-dark" href="?selectedLetter=N">N</a>
+            </li>
+                <li class="nav-item@((string)ViewData["selectedLetter"] == "O" ? " active" : "")">
+                <a class="nav-link text-dark" href="?selectedLetter=O">O</a>
+            </li>
+                <li class="nav-item@((string)ViewData["selectedLetter"] == "P" ? " active" : "")">
+                <a class="nav-link text-dark" href="?selectedLetter=P">P</a>
+            </li>
+                <li class="nav-item@((string)ViewData["selectedLetter"] == "Q" ? " active" : "")">
+                <a class="nav-link text-dark" href="?selectedLetter=Q">Q</a>
+            </li>
+                <li class="nav-item@((string)ViewData["selectedLetter"] == "R" ? " active" : "")">
+                <a class="nav-link text-dark" href="?selectedLetter=R">R</a>
+            </li>
+                <li class="nav-item@((string)ViewData["selectedLetter"] == "S" ? " active" : "")">
+                <a class="nav-link text-dark" href="?selectedLetter=S">S</a>
+            </li>
+                <li class="nav-item@((string)ViewData["selectedLetter"] == "T" ? " active" : "")">
+                <a class="nav-link text-dark" href="?selectedLetter=T">T</a>
+            </li>
+                <li class="nav-item@((string)ViewData["selectedLetter"] == "U" ? " active" : "")">
+                <a class="nav-link text-dark" href="?selectedLetter=U">U</a>
+            </li>
+                <li class="nav-item@((string)ViewData["selectedLetter"] == "V" ? " active" : "")">
+                <a class="nav-link text-dark" href="?selectedLetter=V">V</a>
+            </li>
+                <li class="nav-item@((string)ViewData["selectedLetter"] == "W" ? " active" : "")">
+                <a class="nav-link text-dark" href="?selectedLetter=W">W</a>
+            </li>
+                <li class="nav-item@((string)ViewData["selectedLetter"] == "X" ? " active" : "")">
+                <a class="nav-link text-dark" href="?selectedLetter=X">X</a>
+            </li>
+                <li class="nav-item@((string)ViewData["selectedLetter"] == "Y" ? " active" : "")">
+                <a class="nav-link text-dark" href="?selectedLetter=Y">Y</a>
+            </li>
+                <li class="nav-item@((string)ViewData["selectedLetter"] == "Z" ? " active" : "")">
+                <a class="nav-link text-dark" href="?selectedLetter=Z">Z</a>
+            </li>
+        </ul>
+        </div>
+    </div>
+</nav>
+
+<table class="table">
+    @if (!Model.IsNullOrEmpty())
+    {
+        <thead>
+        <tr>
+            <th>
+                Stem
+            </th>
+            <th>
+                Part of Speech
+            </th>
+            <th>
+                English Translation
+            </th>
+        </tr>
+        </thead>
+    }
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <a asp-action="Details" asp-route-id="@item.Id">@Html.DisplayFor(modelItem => item.WordStem)</a>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DisplayPartOfSpeech)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.WordTranslation)
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

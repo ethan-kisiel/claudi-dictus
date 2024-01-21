@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Net.Http.Headers;
+using System;
 namespace DictusClaudi.Models
 {
 	public class CPartOfSpeech
@@ -141,6 +142,9 @@ namespace DictusClaudi.Models
 				
 				case "INTERJ":
 					return "Interjection";
+
+				case "PREP":
+					return "Preposition";
 
                 default:
                     return typeCode;
