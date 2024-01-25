@@ -53,6 +53,11 @@ namespace DictusClaudi.Models
 		{
 
 		}
+
+		public string DispConnotation
+		{
+			get { return this.DisplayConnotation(); }
+		}
         
 		public string DispGender
 		{
@@ -116,6 +121,20 @@ namespace DictusClaudi.Models
 					return "";
 			}
 		}
+		
+		private string DisplayConnotation()
+		{
+			switch (Connotation)
+			{
+				case "POS":
+					return "Positive";
+				case "NEG":
+					return "Negative";
+
+				default:
+					return Connotation;
+			}
+		}
 
         private string DisplayPOS(string typeCode)
         {
@@ -145,6 +164,9 @@ namespace DictusClaudi.Models
 
 				case "PREP":
 					return "Preposition";
+				
+				case "CONJ":
+					return "Conjunction";
 
                 default:
                     return typeCode;
@@ -244,7 +266,7 @@ Y       --  Mythology
 			switch (this.Area)
 			{
 				case 'X':
-					return "All or none";
+					return "Universal";
 				case 'A':
 					return "Agriculture, Flora, Fauna, Land, Equipment, Rural";
 				case 'B':
@@ -300,7 +322,7 @@ U       --  Eastern Europe
 			switch (this.Geo)
 			{
 				case 'X':
-					return "All or none";
+					return "Universal";
 				case 'A':
 					return "Africa";
 				case 'B':

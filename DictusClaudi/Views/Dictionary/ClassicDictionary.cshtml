@@ -94,6 +94,8 @@
     </div>
 </nav>
 
+@Html.Partial("_PaginationSelector.cshtml")
+
 <table class="table">
     @if (!Model.IsNullOrEmpty())
     {
@@ -128,3 +130,5 @@
     }
     </tbody>
 </table>
+
+@Html.Partial("_PaginationSelector.cshtml")

@@ -3,14 +3,22 @@
 
 @{
     ViewData["Title"] = "Index";
+    bool searchEnglish = (bool?)ViewData["searchEnglish"] ?? true;
 }
 
 <h1>Search</h1>
 
 <form method="get" action="/Dictionary/Index/">
-    <input class="search" type="text" name="searchTerms" placeholder="Search..." />
-    <button class="btn btn-primary" type="submit">Search</button>
+    <div class="form-group">
+        <input class="search form-control" type="text" name="searchTerms" placeholder="Search..." />
+        <input type="checkbox" checked="@(searchEnglish)" data-toggle="toggle" name="searchEnglish"/>
+        
+        <button class="btn btn-primary" type="submit">Search</button>
+    </div>
 </form>
+
+
+@Html.Partial("_PaginationSelector.cshtml")
 
 <table class="table">
     @if (!Model.IsNullOrEmpty())
@@ -46,3 +54,5 @@
     }
     </tbody>
 </table>
+
+@Html.Partial("_PaginationSelector.cshtml")

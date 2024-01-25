@@ -7,7 +7,7 @@
 <h1>Details</h1>
 
 <div>
-    <h4>DictEntry</h4>
+    <h4>@Html.DisplayFor(model => model.WordStem)</h4>
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
@@ -100,11 +100,12 @@
                 @Html.DisplayNameFor(model => model.Connotation)
             </dt>
             <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Connotation)
+                @Html.DisplayFor(model => model.DispConnotation)
             </dd>
         }
     </dl>
 </div>
+
 <div>
     <a href="javascript:history.go(-1)">Back</a>
 </div>

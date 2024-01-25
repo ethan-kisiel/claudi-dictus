@@ -1,0 +1,57 @@
+@{
+    PaginationResult<DictEntry> paginationObject = (PaginationResult<DictEntry>)ViewData["paginationObject"];
+    string? selectedLetter = (string?) ViewData["selectedLetter"] ?? null;
+    string[]? searchTerms = (string[]?) ViewData["searchTerms"] ?? null;
+}
+
+
+<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+   <div class="container-fluid">
+    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+        <ul class="navbar-nav flex-grow-1">
+            @if(paginationObject.HasPreviousPage)
+            {
+            <li class="nav-item">
+                <a class="nav-link text-dark" href="@(paginationObject.ParameterizedHref(paginationObject.PageNumber-1, selectedLetter, searchTerms))">&lt;</a>
+            </li>
+            }
+
+            @if(paginationObject.LastPageNumber >= paginationObject.MaxTabs)/**/
+            {
+                <li class="nav-item@(paginationObject.PageNumber == 1 ? " active" : "")">
+                    <a class="nav-link text-dark" href="@(paginationObject.ParameterizedHref(1, selectedLetter, searchTerms))">1</a>
+                </li>
+                
+                @foreach (int x in paginationObject.MiddlePageNumbers)
+                {
+                    <li class="nav-item@(x==paginationObject.PageNumber ? " active" : "")">
+                        <a class="nav-link text-dark" href="@(paginationObject.ParameterizedHref(x, selectedLetter, searchTerms))">@(x)</a>
+                    </li>
+                }
+                
+                <li class="nav-item@(paginationObject.PageNumber == paginationObject.LastPageNumber ? " active" : "")">
+                    <a class="nav-link text-dark@(paginationObject.PageNumber == paginationObject.LastPageNumber ? " active" : "")"
+                    href="@(paginationObject.ParameterizedHref(paginationObject.LastPageNumber, selectedLetter, searchTerms))">@(paginationObject.LastPageNumber)</a>
+                </li>
+            
+            } else if (paginationObject.LastPageNumber > 1)
+            {
+                @foreach (int x in paginationObject.MiddlePageNumbers)
+                {
+                    <li class="nav-item@(x==paginationObject.PageNumber ? " active" : "")">
+                        <a class="nav-link text-dark"
+                        href="@(paginationObject.ParameterizedHref(x, selectedLetter, searchTerms))">@(x)</a>
+                    </li>
+                }
+            }
+
+            @if(paginationObject.HasNextPage)
+            {
+            <li class="nav-item">
+                <a class="nav-link text-dark" href="@(paginationObject.ParameterizedHref(paginationObject.PageNumber+1, selectedLetter, searchTerms))">&gt;</a>
+            </li>
+            }
+        </ul>
+        </div>
+    </div>
+</nav>
