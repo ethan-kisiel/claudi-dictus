@@ -5,6 +5,8 @@ using DictusClaudi.Models;
 using Newtonsoft.Json;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.CodeAnalysis;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using DictusClaudi.Core.LatinEndingsUtil;
 
 namespace DictusClaudi.Controllers
 {
@@ -247,7 +249,7 @@ namespace DictusClaudi.Controllers
                         if (wordsAverage < 1 && searchSet.Count <= stemSet.Count)
                         {
                             
-                            Console.WriteLine($"Current Clip: {currentClip}; Combined Set: {combinedSet.Count}; Search Set: {searchSet.Count}; Stem Set: {stemSet.Count}");
+                            //Console.WriteLine($"Current Clip: {currentClip}; Combined Set: {combinedSet.Count}; Search Set: {searchSet.Count}; Stem Set: {stemSet.Count}");
 
                             int currSearchTermIndex = 0;
                             int currMatches = 0;
@@ -310,27 +312,35 @@ namespace DictusClaudi.Controllers
                 string[] searchTermsArray = searchTerms.Split(" ");
 
                 // loop thru each search term and check if it is long enough
-                foreach (string term in searchTerms.Split(" "))
+                foreach(string term in entry.AllStems)
                 {
-                    if (term.Length > entry.WordStem?.Length || term.Length < 3)
+                    if (searchTerms == term)
+                    {
+                        return true;
+                    }
+
+                    string entryTranslation = searchTerms.ToLower() ?? "";
+                    string parsedTranslation = LatinEndingsUtil.GetParsedStem(entryTranslation);
+
+                    if (term.Length > searchTerms.Length || searchTerms.Length < 3|| (term.Length / parsedTranslation.Length) < 0.3)
                     { continue; }
 
-                    string entryTranslation = entry.WordStem?.ToLower() ?? "";
+                    
 
+                    HashSet<char> searchSet = new HashSet<char>(term);
+                    
                     for (int i = 0; i <= entryTranslation.Length - term.Length; i++)
                     {
                         string currentClip = entryTranslation.Substring(i, term.Length);
                         HashSet<char> combinedSet = new HashSet<char>($"{term}{currentClip}");
-                        HashSet<char> searchSet = new HashSet<char>(term);
                         HashSet<char> stemSet = new HashSet<char>(currentClip);
-
 
                         float wordsAverage = (float)(combinedSet.Count - (float)(searchSet.Count + stemSet.Count) / 2);
 
-                        if (wordsAverage < 2 && searchSet.Count <= stemSet.Count)
+                        if (wordsAverage < 1  && searchSet.Count <= stemSet.Count)
                         {
                             
-                            Console.WriteLine($"Current Clip: {currentClip}; Combined Set: {combinedSet.Count}; Search Set: {searchSet.Count}; Stem Set: {stemSet.Count}");
+                            //Console.WriteLine($"Current Clip: {currentClip}; Combined Set: {combinedSet.Count}; Search Set: {searchSet.Count}; Stem Set: {stemSet.Count}");
 
                             int currSearchTermIndex = 0;
                             int currMatches = 0;
@@ -361,13 +371,13 @@ namespace DictusClaudi.Controllers
                                 }
                             }
 
-                            if ((float)(maxMatch / searchSet.Count) > 0.05)
+                            if ((float)(maxMatch / searchSet.Count) > 0.1)
                             {
                                 return true;
                             }
                             else
                             {
-                                Console.WriteLine($"{(float)(maxMatch / searchSet.Count)}");
+                                //Console.WriteLine($"{(float)(maxMatch / searchSet.Count)}");
                             }
                         }
                     }
